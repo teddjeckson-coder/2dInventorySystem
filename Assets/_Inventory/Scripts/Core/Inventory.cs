@@ -6,7 +6,7 @@ namespace InventorySystem
     internal class Inventory
     {
         public List<InventorySlot> Slots { get; private set; }
-        public int InventorySize;
+        public int InventorySize { get; private set; }
 
         private Dictionary<int, ItemData> itemDB;
 
@@ -34,14 +34,14 @@ namespace InventorySystem
             {
                 var slot = Slots[i];
 
-                if (!slot.isEmptySlot && slot.itemID == item.iID)
+                if (!slot.isEmptySlot && slot.ItemID == item.iID)
                 {
-                    int spaceLeft = item.imaxStack - slot.amount;
+                    var spaceLeft = item.imaxStack - slot.Amount;
 
                     if (spaceLeft > 0)
                     {
                         int addAmount = Mathf.Min(spaceLeft, amount);
-                        slot.amount += addAmount;
+                        slot.Amount += addAmount;
                         amount -= addAmount;
 
                         if (amount <= 0)
@@ -75,12 +75,12 @@ namespace InventorySystem
             var slot = Slots[slotIndex];
             if (slot.isEmptySlot) return false;
 
-            if (slot.amount < amount)
+            if (slot.Amount < amount)
                 return false;
 
-            slot.amount -= amount;
+            slot.Amount -= amount;
 
-            if (slot.amount <= 0)
+            if (slot.Amount <= 0)
                 slot.Clear();
 
             return true;
@@ -102,35 +102,35 @@ namespace InventorySystem
 
             if (to.isEmptySlot)
             {
-                to.SetItem(from.itemID, from.amount);
+                to.SetItem(from.ItemID, from.Amount);
                 from.Clear();
                 return true;
             }
 
-            if (from.itemID == to.itemID)
+            if (from.ItemID == to.ItemID)
             {
-                var itemData = GetItemData(from.itemID);
+                var itemData = GetItemData(from.ItemID);
                 int maxStack = itemData.imaxStack;
 
-                int total = from.amount + to.amount;
+                int total = from.Amount + to.Amount;
 
                 if (total <= maxStack)
                 {
-                    to.amount = total;
+                    to.Amount = total;
                     from.Clear();
                 }
                 else
                 {
-                    to.amount = maxStack;
-                    from.amount = total - maxStack;
+                    to.Amount = maxStack;
+                    from.Amount = total - maxStack;
                 }
 
                 return true;
             }
-            int tempID = to.itemID;
-            int tempAmount = to.amount;
+            int tempID = to.ItemID;
+            int tempAmount = to.Amount;
 
-            to.SetItem(from.itemID, from.amount);
+            to.SetItem(from.ItemID, from.Amount);
             from.SetItem(tempID, tempAmount);
 
             return true;

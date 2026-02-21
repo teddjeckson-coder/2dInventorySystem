@@ -6,8 +6,8 @@ namespace InventorySystem
     [Serializable]
     internal class InventorySlot
     {
-        public int itemID;
-        public int amount;
+        public int ItemID { get; private set; }
+        public int Amount { get; private set; }
 
         public InventorySlot()
         {
@@ -15,18 +15,18 @@ namespace InventorySystem
         }
 
         public bool isEmptySlot
-            => itemID == 0;
+            => ItemID == 0;
 
         public void Clear()
         {
-            itemID = 0;
-            amount = 0;
+            ItemID = 0;
+            Amount = 0;
         }
 
         public void SetItem(int newID, int newAmount)
         {
-            itemID = newID;
-            amount = newAmount;
+            ItemID = newID;
+            Amount = newAmount;
         }
 
     }
