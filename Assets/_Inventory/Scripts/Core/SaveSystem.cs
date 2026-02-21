@@ -37,8 +37,8 @@ namespace InventorySystem
             {
                 if (i < data.slots.Length)
                 {
-                    inventory.Slots[i].itemID = data.slots[i].itemID;
-                    inventory.Slots[i].amount = data.slots[i].amount;
+                    inventory.Slots[i].SetID(data.slots[i].ItemID);
+                    inventory.Slots[i].SetAmount(data.slots[i].Amount);
                 }
             }
 

@@ -29,5 +29,14 @@ namespace InventorySystem
             Amount = newAmount;
         }
 
+        public void SetAmount(int newAmount)
+        {
+            Amount = newAmount;
+        }
+        public void SetID(int newID)
+        {
+            ItemID = newID;
+        }
+
     }
 }

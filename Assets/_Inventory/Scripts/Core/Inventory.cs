@@ -34,14 +34,14 @@ namespace InventorySystem
             {
                 var slot = Slots[i];
 
-                if (!slot.isEmptySlot && slot.ItemID == item.iID)
+                if (!slot.isEmptySlot && slot.ItemID == item.ID)
                 {
                     var spaceLeft = item.imaxStack - slot.Amount;
 
                     if (spaceLeft > 0)
                     {
                         int addAmount = Mathf.Min(spaceLeft, amount);
-                        slot.Amount += addAmount;
+                        slot.SetAmount(slot.Amount + addAmount);
                         amount -= addAmount;
 
                         if (amount <= 0)
@@ -57,7 +57,7 @@ namespace InventorySystem
                 if (slot.isEmptySlot)
                 {
                     int addAmount = Mathf.Min(item.imaxStack, amount);
-                    slot.SetItem(item.iID, addAmount);
+                    slot.SetItem(item.ID, addAmount);
                     amount -= addAmount;
 
                     if (amount <= 0)
@@ -78,7 +78,7 @@ namespace InventorySystem
             if (slot.Amount < amount)
                 return false;
 
-            slot.Amount -= amount;
+            slot.SetAmount(slot.Amount - amount);
 
             if (slot.Amount <= 0)
                 slot.Clear();
@@ -116,13 +116,13 @@ namespace InventorySystem
 
                 if (total <= maxStack)
                 {
-                    to.Amount = total;
+                    to.SetAmount(total);
                     from.Clear();
                 }
                 else
                 {
-                    to.Amount = maxStack;
-                    from.Amount = total - maxStack;
+                    to.SetAmount(maxStack);
+                    from.SetAmount(total - maxStack);
                 }
 
                 return true;
