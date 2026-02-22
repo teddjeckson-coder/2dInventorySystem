@@ -88,7 +88,7 @@ namespace InventorySystem
 
         public bool TransferItem(int fromSlot, int toSlot)
         {
-            if (IsValidIndex(fromSlot) && IsValidIndex(toSlot))
+            if (!IsValidIndex(fromSlot) || !IsValidIndex(toSlot))
                 return false;
 
             if (fromSlot == toSlot)
@@ -149,6 +149,11 @@ namespace InventorySystem
         private bool IsValidIndex(int index)
         {
             return index >= 0 && index < InventorySize;
+        }
+        public void RegisterItem(ItemData item)
+        {
+            if (!itemDB.ContainsKey(item.ID))
+                itemDB.Add(item.ID, item);
         }
     }
 }
