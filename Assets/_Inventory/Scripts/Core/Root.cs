@@ -22,6 +22,7 @@ namespace InventorySystem
             _inventory.AddItem(_testItem, 5);
 
             _draggedController = new DraggedController(_draggedItem, this);
+            _inventory.SetDraggedController(_draggedController);
             _inventory.AddItem(_testItem, 6);
             _inventory.RemoveItem(0, 2);
         }

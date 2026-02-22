@@ -5,6 +5,9 @@ namespace InventorySystem
 {
     internal class Inventory
     {
+        private DraggedController _draggedController;
+        private int _draggedFromSlot = -1;
+
         private InventoryDisplay _display;
         public List<InventorySlot> Slots { get; private set; }
         public int InventorySize { get; private set; }
@@ -26,7 +29,10 @@ namespace InventorySystem
         {
             return itemDB.ContainsKey(id) ? itemDB[id] : null;
         }
-
+        public void SetDraggedController(DraggedController controller)
+        {
+            _draggedController = controller;
+        }
         public bool AddItem(ItemData item, int amount)
         {
             if (item == null) return false;
@@ -111,6 +117,8 @@ namespace InventorySystem
             {
                 to.SetItem(from.ItemID, from.Amount);
                 from.Clear();
+                Debug.Log(from.isEmptySlot);
+                Debug.Log(from.ItemID);
                 return true;
             }
 
@@ -174,18 +182,68 @@ namespace InventorySystem
                     var itemData = GetItemData(slot.ItemID);
                     _display.SlotViews[i].SetItem(itemData.iicon, slot.Amount);
                 }
+                else
+                {
+                    _display.SlotViews[i].SetItem(null, 0); // <-- ВАЖНО
+                }
+
             }
         }
         public void Initialize(InventoryDisplay display)
         {
             _display = display;
 
-            for (int i = 0; i < InventorySize; i++)
+            // Если UI слотов меньше чем логических — создаём недостающие
+            while (_display.SlotViews.Count < InventorySize)
             {
                 _display.CreateSlot();
             }
 
+            // Если UI слотов больше чем нужно — обрезаем лишние
+            while (_display.SlotViews.Count > InventorySize)
+            {
+                var last = _display.SlotViews[_display.SlotViews.Count - 1];
+                GameObject.Destroy(last.gameObject);
+                _display.SlotViews.RemoveAt(_display.SlotViews.Count - 1);
+            }
+
+            // Подписываемся на клики
+            for (int i = 0; i < InventorySize; i++)
+            {
+                int index = i;
+                _display.SlotViews[i].OnClicked += () => OnSlotClicked(index);
+            }
+
             RefreshDisplay();
+        }
+
+        private void OnSlotClicked(int index)
+        {
+            var slot = Slots[index];
+
+            // Если сейчас ничего не тащим
+            if (_draggedFromSlot == -1)
+            {
+                if (slot.isEmptySlot) return;
+
+                var itemData = GetItemData(slot.ItemID);
+
+                _draggedFromSlot = index;
+
+
+
+                _draggedController.StartDrag(itemData.iicon, slot.Amount);
+            }
+            else
+            {
+                // Пытаемся перенести
+                TransferItem(_draggedFromSlot, index);
+
+                _draggedController.Drop();
+                _draggedFromSlot = -1;
+
+                RefreshDisplay();
+            }
         }
     }
 }
