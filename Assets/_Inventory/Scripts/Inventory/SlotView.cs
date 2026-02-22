@@ -16,9 +16,24 @@ namespace InventorySystem
 
         public event Action OnClicked;
         
+        private Color _originalColor;
+        private Color _transparentColor;
+        
+        private void Awake()
+        {
+            //Initialize color and transparent color
+            _originalColor = _image.color;
+            var color = _originalColor ;
+            color.a = 0f;
+            _transparentColor = color;
+            
+            _image.color = _image.sprite == null ?  _transparentColor : _originalColor;
+        }
+        
         public void SetItem(Sprite sprite, int amount)
         {
             _image.sprite = sprite;
+            _image.color = _image.sprite == null ?  _transparentColor : _originalColor;
             ChangeAmount(amount); 
         }
 
