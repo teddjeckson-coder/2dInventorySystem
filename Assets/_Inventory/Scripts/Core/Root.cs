@@ -17,6 +17,8 @@ namespace InventorySystem
 
             _inventory.Initialize(_display);
             _inventory.AddItem(_testItem, 5);
+            _inventory.AddItem(_testItem, 6);
+            _inventory.RemoveItem(0, 2);
         }
 
     }
