@@ -9,17 +9,13 @@ namespace InventorySystem
         [SerializeField] private SlotView slotPrefab;
         [SerializeField] private Transform parent;
 
-        private List<SlotView> _slotViews = new();
+        public List<SlotView> SlotViews { get; private set; } = new List<SlotView>();
 
         public SlotView CreateSlot()
         {
             var slot = Instantiate(slotPrefab, parent);
-            _slotViews.Add(slot);
+            SlotViews.Add(slot);
             return slot;
-        }
-        public List<SlotView> GetSlotViews()
-        {
-            return _slotViews;
         }
     }
 }

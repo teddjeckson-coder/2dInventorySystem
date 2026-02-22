@@ -169,15 +169,10 @@ namespace InventorySystem
             {
                 var slot = Slots[i];
 
-                if (slot.isEmptySlot)
+                if (!slot.isEmptySlot) 
                 {
                     var itemData = GetItemData(slot.ItemID);
-                    _display.GetSlotViews()[i].SetItem(itemData.iicon, slot.Amount);
-                }
-                else
-                {
-                    var itemData = GetItemData(slot.ItemID);
-                    _display.GetSlotViews()[i].SetItem(itemData.iicon, slot.Amount);
+                    _display.SlotViews[i].SetItem(itemData.iicon, slot.Amount);
                 }
             }
         }

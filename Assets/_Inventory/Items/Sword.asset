@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99734a086ce2b94419e8aa8e157f094c, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: Assembly-CSharp::InventorySystem.ItemData
-  iname: 
-  iicon: {fileID: 0}
+  <ID>k__BackingField: 1
+  iname: sss
+  iicon: {fileID: 1618753135323967521, guid: 9cb9b405a4eec714897f9e1222546100, type: 3}
   imaxStack: 64
