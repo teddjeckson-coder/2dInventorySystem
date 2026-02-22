@@ -89,7 +89,7 @@ namespace InventorySystem
 
             if (slot.Amount <= 0)
                 slot.Clear();
-
+            RefreshDisplay();
             return true;
         }
 
