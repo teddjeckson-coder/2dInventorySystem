@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,11 +12,13 @@ namespace InventorySystem
         private Transform parent;
 
         private List<SlotView> _slotViews = new();
-
-        public void CreateSlot()
+        
+        public SlotView CreateSlot()
         {
             var slot = Instantiate(slotPrefab, parent);
             _slotViews.Add(slot);
+            return slot;
         }
     }
+    
 }

@@ -1,15 +1,19 @@
+using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace InventorySystem
 {
-    internal class SlotView : MonoBehaviour
+    internal class SlotView : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField]
         private Image _image;
         [SerializeField]
         private TMP_Text _text;
+
+        public event Action OnClicked;
         
         public void SetItem(Sprite sprite, int amount)
         {
@@ -21,6 +25,13 @@ namespace InventorySystem
         {
             var clampedValue = Mathf.Clamp(amount, 1, int.MaxValue);
             _text.text = clampedValue == 1 ? "" : clampedValue.ToString();
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if (eventData.button != PointerEventData.InputButton.Left) return;
+            
+            OnClicked?.Invoke();
         }
     }
 }
