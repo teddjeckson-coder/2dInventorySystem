@@ -1,3 +1,4 @@
+using System;
 using InventorySystem;
 using UnityEngine;
 
@@ -7,8 +8,10 @@ namespace InventorySystem
     {
         [SerializeField] private InventoryDisplay _display;
         [SerializeField] private ItemData _testItem;
+        [SerializeField] private DraggedItem _draggedItem;
 
         private Inventory _inventory;
+        private DraggedController _draggedController;
 
         public void Awake()
         {
@@ -17,8 +20,14 @@ namespace InventorySystem
 
             _inventory.Initialize(_display);
             _inventory.AddItem(_testItem, 5);
+
+            _draggedController = new DraggedController(_draggedItem, this);
         }
 
+        public void Update()
+        {
+            _draggedController.Update();
+        }
     }
 
 }

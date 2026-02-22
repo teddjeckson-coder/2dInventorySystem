@@ -5,11 +5,13 @@ namespace InventorySystem
 {
     internal class DraggedController
     {
+        private Root _root;
         private DraggedItem _draggedItem;
         private bool _isDragging = false;
 
-        public DraggedController(DraggedItem draggedItem)
+        public DraggedController(DraggedItem draggedItem, Root root)
         {
+            _root = root;
             _draggedItem = Initialize(draggedItem);
             DisableDraggedItem();
         }
