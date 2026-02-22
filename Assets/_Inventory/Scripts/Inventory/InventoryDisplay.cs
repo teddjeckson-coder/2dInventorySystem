@@ -6,13 +6,11 @@ namespace InventorySystem
 {
     internal class InventoryDisplay : MonoBehaviour
     {
-        [SerializeField] 
-        private SlotView slotPrefab;
-        [SerializeField] 
-        private Transform parent;
+        [SerializeField] private SlotView slotPrefab;
+        [SerializeField] private Transform parent;
 
         private List<SlotView> _slotViews = new();
-        
+
         public SlotView CreateSlot()
         {
             var slot = Instantiate(slotPrefab, parent);
@@ -20,5 +18,4 @@ namespace InventorySystem
             return slot;
         }
     }
-    
 }

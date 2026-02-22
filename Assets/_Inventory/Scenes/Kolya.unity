@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 21464340}
   - component: {fileID: 21464342}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: EventSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -512,6 +512,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2832884156940226123, guid: faf2663330e51dd4f948bc506982b32d, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2832884156940226123, guid: faf2663330e51dd4f948bc506982b32d, type: 3}
+      propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4165643828139816797, guid: faf2663330e51dd4f948bc506982b32d, type: 3}
