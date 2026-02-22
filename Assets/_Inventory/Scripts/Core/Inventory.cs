@@ -5,6 +5,7 @@ namespace InventorySystem
 {
     internal class Inventory
     {
+        private InventoryDisplay _display;
         public List<InventorySlot> Slots { get; private set; }
         public int InventorySize { get; private set; }
 
@@ -45,7 +46,10 @@ namespace InventorySystem
                         amount -= addAmount;
 
                         if (amount <= 0)
+                        {
+                            RefreshDisplay();
                             return true;
+                        }
                     }
                 }
             }
@@ -61,7 +65,10 @@ namespace InventorySystem
                     amount -= addAmount;
 
                     if (amount <= 0)
+                    {
+                        RefreshDisplay();
                         return true;
+                    }
                 }
             }
 
@@ -154,6 +161,36 @@ namespace InventorySystem
         {
             if (!itemDB.ContainsKey(item.ID))
                 itemDB.Add(item.ID, item);
+        }
+
+        private void RefreshDisplay()
+        {
+            for (int i = 0; i < InventorySize; i++)
+            {
+                var slot = Slots[i];
+
+                if (slot.isEmptySlot)
+                {
+                    var itemData = GetItemData(slot.ItemID);
+                    _display.GetSlotViews()[i].SetItem(itemData.iicon, slot.Amount);
+                }
+                else
+                {
+                    var itemData = GetItemData(slot.ItemID);
+                    _display.GetSlotViews()[i].SetItem(itemData.iicon, slot.Amount);
+                }
+            }
+        }
+        public void Initialize(InventoryDisplay display)
+        {
+            _display = display;
+
+            for (int i = 0; i < InventorySize; i++)
+            {
+                _display.CreateSlot();
+            }
+
+            RefreshDisplay();
         }
     }
 }

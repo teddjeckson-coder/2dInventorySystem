@@ -17,5 +17,9 @@ namespace InventorySystem
             _slotViews.Add(slot);
             return slot;
         }
+        public List<SlotView> GetSlotViews()
+        {
+            return _slotViews;
+        }
     }
 }

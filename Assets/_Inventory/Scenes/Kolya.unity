@@ -312,6 +312,7 @@ GameObject:
   - component: {fileID: 966105905}
   - component: {fileID: 966105904}
   - component: {fileID: 966105903}
+  - component: {fileID: 966105906}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -393,6 +394,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &966105906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 966105902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 407667a65a6a4a94281d0279df6d115a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Root
+  _display: {fileID: 5761910109320679783}
+  _testItem: {fileID: 0}
 --- !u!224 &1264418918 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 473011526990946163, guid: faf2663330e51dd4f948bc506982b32d, type: 3}
@@ -639,6 +654,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: faf2663330e51dd4f948bc506982b32d, type: 3}
+--- !u!114 &5761910109320679783 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4165643828139816797, guid: faf2663330e51dd4f948bc506982b32d, type: 3}
+  m_PrefabInstance: {fileID: 5761910109320679782}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3872587662384d89b57cde90ca0a12a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventorySystem.InventoryDisplay
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
